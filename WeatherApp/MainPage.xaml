@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.MainPage"
+             xmlns:local="clr-namespace:WeatherApp">
+
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="sky_background.png" />
+    </ContentPage.BackgroundImageSource>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DateConverter x:Key="DateConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            VerticalOptions="Center">
+
+            <StackLayout
+                BackgroundColor="Black"
+                Opacity="0.7"
+                Margin="0,20,0,20"
+                Orientation="Vertical">
+                <Label Text="Your location:" Margin=" 20,0,0,0" FontSize="25" HorizontalOptions="Center" />
+                <Label x:Name="lblLatitude" Text="Latitude:" Margin=" 20,0,0,0" FontSize="20" HorizontalOptions="Center"/>
+                <Label x:Name="lblLongitude" Text="Longitude:" Margin=" 20,0,0,0" FontSize="20" HorizontalOptions="Center"/>
+                <Label x:Name="WeatherLocation" Margin="0,20,0,0" FontSize="25" HorizontalOptions="Center" />
+                <Label Text="{Binding Main.Temperature, StringFormat='Temperature: {0}°C'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Weather[0].Description, StringFormat='Description: {0}'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Main.Humidity, StringFormat='Humidity: {0}%'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Wind.Speed, StringFormat='Wind Speed: {0} km/h'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Main.Pressure, StringFormat='Pressure: {0} hPa'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Clouds.All, StringFormat='Cloudiness: {0}%'}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Sys.Sunrise, StringFormat='Sunrise: {0}', Converter={StaticResource DateConverter}}" HorizontalOptions="Center" FontSize="20"/>
+                <Label Text="{Binding Sys.Sunset, StringFormat='Sunset: {0}', Converter={StaticResource DateConverter}}" HorizontalOptions="Center" FontSize="20"/>
+                <HorizontalStackLayout
+                    HorizontalOptions="Center">
+                    <Entry
+                    x:Name="cityName"
+                    Margin="0,20,10,20"
+                    MinimumWidthRequest="250"
+                    VerticalOptions="Start"
+                    BackgroundColor="White" 
+                    TextColor="Black"
+                    />
+                    <Button
+                        BackgroundColor="White"
+                        Text="Get Weather"
+                        TextColor="Black"
+                        FontSize="18"
+                        Margin="0,20,0,20"
+                        Clicked="GetWeatherButton"
+                        />
+                </HorizontalStackLayout>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
